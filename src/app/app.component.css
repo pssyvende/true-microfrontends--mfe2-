@@ -1,0 +1,8 @@
+div {
+    position: relative;
+}
+p {
+    position: absolute;
+    width: 250px;
+    text-align: center;
+}
