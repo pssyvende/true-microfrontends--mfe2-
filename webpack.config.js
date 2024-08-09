@@ -3,13 +3,14 @@ const { shareAll, withModuleFederationPlugin } = require('@angular-architects/mo
 module.exports = withModuleFederationPlugin({
 
   name: 'true-microfrontends--mfe2',
+  filename: 'remoteEntry.js',
 
   exposes: {
-    './Component': './src/app/app.component.ts',
+    './web-components': './src/bootstrap.ts',
   },
 
   shared: {
-    ...shareAll({ singleton: true, strictVersion: true, requiredVersion: 'auto' }),
+    ...shareAll({ requiredVersion: 'auto' }),
   },
 
 });
