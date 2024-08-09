@@ -1,8 +1,9 @@
-import { NgModule } from '@angular/core';
+import { ApplicationRef, DoBootstrap, Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { FeatureBModule } from './feature-b/feature-b.module';
+import { createCustomElement } from '@angular/elements';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,16 @@ import { FeatureBModule } from './feature-b/feature-b.module';
     FeatureBModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: []
 })
-export class AppModule { }
+export class AppModule implements DoBootstrap {
+
+  constructor(
+    private injector: Injector
+  ) {}
+
+  ngDoBootstrap(appRef: ApplicationRef): void {
+    const ce = createCustomElement(AppComponent, {injector: this.injector});
+    customElements.define('mfe2-element', ce);
+  }
+}
